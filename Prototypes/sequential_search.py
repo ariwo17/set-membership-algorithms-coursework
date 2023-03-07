@@ -7,3 +7,14 @@ def linear_search(array, target):
         if element == target:
             return True
     return False
+
+
+'''file1 = open("test1-mobydick.txt", "r")
+words = []
+for line in file1:
+    words.append(line)
+
+if __name__ == "__main__":
+    print("TRIAL ONE: ", timeit.timeit(lambda: linear_search(words, "degree"), number=5000))
+    print("TRIAL TWO: ", timeit.timeit(lambda: linear_search(words, "degree"), number=5000))
+    print("TRIAL THREE: ", timeit.timeit(lambda: linear_search(words, "degree"), number=5000))'''
