@@ -73,19 +73,16 @@ class SequentialSearchSet(AbstractSet):
         self.set = []
 
     def insertElement(self, element):
-        inserted = False
-        if element not in self.set:
+        if self.searchElement(element) is False:
             self.set.append(element)
-            inserted = True
-        return inserted
+            return True
+        return False
 
     def searchElement(self, element):
-        found = False
         for member in self.set:
             if member == element:
-                found = True
-                break
-        return found
+                return True
+        return False
 
 
 # mySS = SequentialSearchSet()
@@ -99,51 +96,45 @@ class BinarySearchTreeSet(AbstractSet):
         self.root = None
 
     def insertElement(self, element):
-        inserted = False
         if not self.root:
             self.root = Node(element)
-            inserted = True
+            return True
         else:
             current = self.root
             while current:
                 if current.value == element:
-                    inserted = False
-                    break
+                    return False
                 elif current.value > element:
                     if not current.left:
                         current.left = Node(element)
-                        inserted = True
-                        break
+                        return True
                     current = current.left
                 elif current.value < element:
                     if not current.right:
                         current.right = Node(element)
-                        inserted = True
-                        break
+                        return True
                     current = current.right
-        return inserted
+        return False
 
     def searchElement(self, element):
-        found = False
         current = self.root
         while current:
             if current.value == element:
-                found = True
-                break
+                return True
             elif current.value > element:
                 current = current.left
             elif current.value < element:
                 current = current.right
-        return found
+        return False
 
 
-# myBST = BinarySearchTreeSet()
-# values_to_add = [str(i) for i in range(60000)]
-# for value in values_to_add:
-#     myBST.insertElement(value)
-# print(myBST.searchElement(str(59000)))
-# print(myBST.insertElement(str(59000)))
-# print(myBST.insertElement(str(61000)))
+myBST = BinarySearchTreeSet()
+values_to_add = [str(i) for i in range(60000)]
+for value in values_to_add:
+    myBST.insertElement(value)
+print(myBST.searchElement(str(59000)))
+print(myBST.insertElement(str(59000)))
+print(myBST.insertElement(str(61000)))
 
 
 class BalancedSearchTreeSet(AbstractSet):
@@ -257,7 +248,7 @@ class BloomFilterSet(AbstractSet):
         return hash_values
 
     @staticmethod
-    def _optimise_k(m, n):
+    def optimise_k(m, n):
         return 1 + int(LN2 * (m / n))
 
     def insertElement(self, element):
@@ -308,6 +299,7 @@ SAMPLE_INTERVAL = 200
 test_file = "synthetic_test_search.txt"
 test_words = set()
 
+
 def generate_word(scarcity=0.05):
     limit = int(1 / scarcity)
     roulette = random.randint(0, int(1 / scarcity))
@@ -323,23 +315,23 @@ def generate_word(scarcity=0.05):
             word += random.choice(CONSONANTS)
     return word
 
-# Generate the words and write them to the output file
-with open(output_file, 'w') as f:
-    for i in range(NUM_WORDS):
-        word = generate_word()
-        f.write(word)
-        if i % SAMPLE_INTERVAL == 0:
-            test_words.add(word)
-            test_words.add(generate_word())
-        if i <= NUM_WORDS:
-            f.write(' ')
-
-test_words = list(test_words)
-with open(test_file, 'w') as f:
-    for i in range(len(test_words)):
-        f.write(test_words[i])
-        if i <= len(test_words):
-            f.write('\n')
-
-print(repr(test_words))
-print(len(test_words))
+# # Generate the words and write them to the output file
+# with open(output_file, 'w') as f:
+#     for i in range(NUM_WORDS):
+#         word = generate_word()
+#         f.write(word)
+#         if i % SAMPLE_INTERVAL == 0:
+#             test_words.add(word)
+#             test_words.add(generate_word())
+#         if i <= NUM_WORDS:
+#             f.write(' ')
+#
+# test_words = list(test_words)
+# with open(test_file, 'w') as f:
+#     for i in range(len(test_words)):
+#         f.write(test_words[i])
+#         if i <= len(test_words):
+#             f.write('\n')
+#
+# print(repr(test_words))
+# print(len(test_words))
