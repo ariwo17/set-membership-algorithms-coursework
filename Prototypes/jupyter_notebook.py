@@ -296,7 +296,7 @@ VOWELS = 'aeiou'
 output_file = "synthetic_data.txt"
 
 SAMPLE_INTERVAL = 200
-test_file = "synthetic_test_search.txt"
+test_file = "../Archive(got from moodle)/testfiles/synthetic_test_search.txt"
 test_words = set()
 
 
