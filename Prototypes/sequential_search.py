@@ -10,7 +10,7 @@ def linear_search(array, target):
 
 
 words = []
-with open("test1-mobydick.txt", "r") as file:
+with open("../Archive(got from moodle)/testfiles/test1-mobydick.txt", "r") as file:
     for line in file:
         words.append(line)
 
